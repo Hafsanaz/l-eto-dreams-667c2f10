@@ -27,6 +27,18 @@ function OrderSuccess() {
   const { id, tracker } = Route.useSearch();
   const shortId = id ? id.slice(0, 8).toUpperCase() : "";
   const fetchStatus = useServerFn(getOrderPaymentStatus);
+  const [receipt, setReceipt] = useState<{ phone: string; text: string } | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    try {
+      const raw = sessionStorage.getItem(`leto-receipt-${id}`);
+      if (raw) setReceipt(JSON.parse(raw));
+    } catch {
+      setReceipt(null);
+    }
+  }, [id]);
+
 
   // Poll the order for a few seconds after Safepay redirect so the webhook has time to land.
   const { data: order } = useQuery({
