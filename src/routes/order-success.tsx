@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckCircle2, Clock, XCircle } from "lucide-react";
+import { CheckCircle2, Clock, XCircle, Receipt } from "lucide-react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -27,6 +28,18 @@ function OrderSuccess() {
   const { id, tracker } = Route.useSearch();
   const shortId = id ? id.slice(0, 8).toUpperCase() : "";
   const fetchStatus = useServerFn(getOrderPaymentStatus);
+  const [receipt, setReceipt] = useState<{ phone: string; text: string } | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    try {
+      const raw = sessionStorage.getItem(`leto-receipt-${id}`);
+      if (raw) setReceipt(JSON.parse(raw));
+    } catch {
+      setReceipt(null);
+    }
+  }, [id]);
+
 
   // Poll the order for a few seconds after Safepay redirect so the webhook has time to land.
   const { data: order } = useQuery({
@@ -78,6 +91,21 @@ function OrderSuccess() {
           <p className="mt-3 text-sm text-navy-soft">
             Our team will call you shortly to confirm. Payment is Cash on Delivery.
           </p>
+        )}
+        {receipt && !failed && (
+          <div className="mt-8">
+            <a
+              href={`https://wa.me/${receipt.phone}?text=${encodeURIComponent(receipt.text)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-navy"
+            >
+              <Receipt className="h-4 w-4" /> Send receipt to my WhatsApp
+            </a>
+            <p className="mt-3 text-xs text-navy-soft">
+              We'll deliver your receipt to {receipt.phone.replace(/^92/, "0")} on WhatsApp.
+            </p>
+          </div>
         )}
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link to="/menu" className="btn-ghost">Order more</Link>

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, Phone, Clock, Instagram, Facebook, Send } from "lucide-react";
+import { MapPin, Phone, Clock, Instagram, Facebook, Send, Camera, ImagePlus, X } from "lucide-react";
 import { useState } from "react";
 import { SOCIAL, useSelectedCity } from "@/lib/contact";
 
@@ -18,6 +18,23 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const [sent, setSent] = useState(false);
+  const [photos, setPhotos] = useState<{ url: string; name: string }[]>([]);
+
+  function onPickPhotos(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
+    setPhotos((prev) => [
+      ...prev,
+      ...files.map((f) => ({ url: URL.createObjectURL(f), name: f.name })),
+    ]);
+    e.target.value = "";
+  }
+
+  function removePhoto(url: string) {
+    setPhotos((prev) => prev.filter((p) => p.url !== url));
+    URL.revokeObjectURL(url);
+  }
+
   const city = useSelectedCity();
   const { addressLines: ADDRESS_LINES, hours: HOURS, phoneDisplay: PHONE_DISPLAY, phoneTel: PHONE_TEL, whatsappNumber, mapEmbed } = city;
   const WHATSAPP_URL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi L'ETO Bakeshop (${city.name}), I'd like to place an order.`)}`;
@@ -26,7 +43,8 @@ function Contact() {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const text = encodeURIComponent(
-      `Hi L'ETO Bakeshop (${city.name}),\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\n\n${data.get("message")}`,
+      `Hi L'ETO Bakeshop (${city.name}),\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\n\n${data.get("message")}` +
+        (photos.length ? `\n\n(I'll attach ${photos.length} reference photo${photos.length > 1 ? "s" : ""} here.)` : ""),
     );
     window.open(`https://wa.me/${whatsappNumber}?text=${text}`, "_blank");
     setSent(true);
@@ -130,9 +148,47 @@ function Contact() {
                     className="mt-2 w-full border-0 border-b border-navy/30 bg-transparent py-3 text-navy outline-none focus:border-gold" />
                 </div>
                 <div>
-                  <label className="eyebrow text-navy-soft" htmlFor="message">Your dream cake</label>
+                  <label className="eyebrow text-navy-soft" htmlFor="message">Your dessert</label>
                   <textarea id="message" name="message" required rows={4}
                     className="mt-2 w-full border-0 border-b border-navy/30 bg-transparent py-3 text-navy outline-none focus:border-gold" />
+                </div>
+                <div>
+                  <p className="eyebrow text-navy-soft">Reference picture (optional)</p>
+                  <p className="mt-2 text-xs text-navy-soft">
+                    Snap or pick a photo so we can see the design you have in mind.
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-3">
+                    <label className="btn-ghost cursor-pointer">
+                      <Camera className="h-4 w-4" /> Take photo
+                      <input type="file" accept="image/*" capture="environment" className="hidden" onChange={onPickPhotos} />
+                    </label>
+                    <label className="btn-ghost cursor-pointer">
+                      <ImagePlus className="h-4 w-4" /> From gallery
+                      <input type="file" accept="image/*" multiple className="hidden" onChange={onPickPhotos} />
+                    </label>
+                  </div>
+                  {photos.length > 0 && (
+                    <>
+                      <div className="mt-4 flex flex-wrap gap-3">
+                        {photos.map((p) => (
+                          <div key={p.url} className="relative h-20 w-20 overflow-hidden rounded-sm border border-navy/20">
+                            <img src={p.url} alt={p.name} className="h-full w-full object-cover" />
+                            <button
+                              type="button"
+                              onClick={() => removePhoto(p.url)}
+                              aria-label={`Remove ${p.name}`}
+                              className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center bg-navy/80 text-ivory"
+                            >
+                              <X className="h-3 w-3" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="mt-3 text-xs text-navy-soft">
+                        WhatsApp opens with your message — attach the photo{photos.length > 1 ? "s" : ""} there before sending.
+                      </p>
+                    </>
+                  )}
                 </div>
                 <button type="submit" className="btn-navy w-full">
                   <Send className="h-4 w-4" /> Send via WhatsApp

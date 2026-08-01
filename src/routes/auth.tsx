@@ -72,7 +72,10 @@ function AuthPage() {
       if (data.session) {
         goNext();
       } else {
-        setInfo("Check your email to confirm your account, then sign in.");
+        // No verification step — sign the new customer straight in.
+        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+        if (signInError) return setError(signInError.message);
+        goNext();
       }
     }
   };
