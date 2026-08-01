@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, Phone, Clock, Instagram, Facebook, Send } from "lucide-react";
+import { MapPin, Phone, Clock, Instagram, Facebook, Send, Camera, ImagePlus, X } from "lucide-react";
 import { useState } from "react";
 import { SOCIAL, useSelectedCity } from "@/lib/contact";
 
