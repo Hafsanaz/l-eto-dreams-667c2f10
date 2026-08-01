@@ -92,6 +92,21 @@ function OrderSuccess() {
             Our team will call you shortly to confirm. Payment is Cash on Delivery.
           </p>
         )}
+        {receipt && !failed && (
+          <div className="mt-8">
+            <a
+              href={`https://wa.me/${receipt.phone}?text=${encodeURIComponent(receipt.text)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-navy"
+            >
+              <Receipt className="h-4 w-4" /> Send receipt to my WhatsApp
+            </a>
+            <p className="mt-3 text-xs text-navy-soft">
+              We'll deliver your receipt to {receipt.phone.replace(/^92/, "0")} on WhatsApp.
+            </p>
+          </div>
+        )}
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link to="/menu" className="btn-ghost">Order more</Link>
           <Link to="/" className="btn-navy">Back home</Link>
