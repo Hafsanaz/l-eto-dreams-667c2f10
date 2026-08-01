@@ -18,6 +18,23 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const [sent, setSent] = useState(false);
+  const [photos, setPhotos] = useState<{ url: string; name: string }[]>([]);
+
+  function onPickPhotos(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
+    setPhotos((prev) => [
+      ...prev,
+      ...files.map((f) => ({ url: URL.createObjectURL(f), name: f.name })),
+    ]);
+    e.target.value = "";
+  }
+
+  function removePhoto(url: string) {
+    setPhotos((prev) => prev.filter((p) => p.url !== url));
+    URL.revokeObjectURL(url);
+  }
+
   const city = useSelectedCity();
   const { addressLines: ADDRESS_LINES, hours: HOURS, phoneDisplay: PHONE_DISPLAY, phoneTel: PHONE_TEL, whatsappNumber, mapEmbed } = city;
   const WHATSAPP_URL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi L'ETO Bakeshop (${city.name}), I'd like to place an order.`)}`;
