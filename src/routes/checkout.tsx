@@ -135,6 +135,35 @@ function Checkout() {
       return;
     }
 
+    // Build the receipt once — used for the shop message and the customer's own WhatsApp copy.
+    const itemLines = items.map((i) => `• ${i.name} × ${i.qty} — ${formatPKR(i.price * i.qty)}`).join("\n");
+    const receipt =
+      `L'ETO Bakeshop — Receipt for order #${data.id.slice(0, 8).toUpperCase()}\n\n` +
+      `${itemLines}\n\n` +
+      `Subtotal: ${formatPKR(subtotal)}\nDelivery: ${formatPKR(DELIVERY_FEE)}\nTotal: ${formatPKR(total)}\n\n` +
+      `Name: ${parsed.data.customer_name}\nPhone: ${parsed.data.phone}\nAddress: ${parsed.data.address}\n` +
+      (parsed.data.notes ? `Notes: ${parsed.data.notes}\n` : "") +
+      `Payment: ${payMethod === "card" ? "Debit/Credit card" : "Cash on Delivery"}`;
+
+    // Normalise the customer's phone to an international WhatsApp number (PK).
+    const digits = parsed.data.phone.replace(/\D/g, "");
+    const customerWa = digits.startsWith("92")
+      ? digits
+      : digits.startsWith("0")
+      ? `92${digits.slice(1)}`
+      : digits.length === 10
+      ? `92${digits}`
+      : digits;
+
+    try {
+      sessionStorage.setItem(
+        `leto-receipt-${data.id}`,
+        JSON.stringify({ phone: customerWa, text: receipt }),
+      );
+    } catch {
+      // Storage unavailable — the receipt button just won't show.
+    }
+
     // Card payment → mint Safepay checkout and redirect to hosted page.
     if (payMethod === "card") {
       try {
@@ -151,15 +180,8 @@ function Checkout() {
       }
     }
 
-    // COD → WhatsApp confirmation, then success page.
-    const itemLines = items.map((i) => `• ${i.name} × ${i.qty} — ${formatPKR(i.price * i.qty)}`).join("\n");
-    const msg =
-      `Hey L'ETO, I've just placed order #${data.id.slice(0, 8).toUpperCase()}.\n\n` +
-      `${itemLines}\n\n` +
-      `Subtotal: ${formatPKR(subtotal)}\nDelivery: ${formatPKR(DELIVERY_FEE)}\nTotal: ${formatPKR(total)}\n\n` +
-      `Name: ${parsed.data.customer_name}\nPhone: ${parsed.data.phone}\nAddress: ${parsed.data.address}\n` +
-      (parsed.data.notes ? `Notes: ${parsed.data.notes}\n` : "") +
-      `Payment: Cash on Delivery`;
+    // COD → WhatsApp confirmation to the bakeshop, then success page.
+    const msg = `Hey L'ETO, I've just placed order #${data.id.slice(0, 8).toUpperCase()}.\n\n${receipt}`;
     const waUrl = `https://wa.me/923356633668?text=${encodeURIComponent(msg)}`;
 
     clear();
