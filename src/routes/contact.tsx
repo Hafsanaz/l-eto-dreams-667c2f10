@@ -43,7 +43,8 @@ function Contact() {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const text = encodeURIComponent(
-      `Hi L'ETO Bakeshop (${city.name}),\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\n\n${data.get("message")}`,
+      `Hi L'ETO Bakeshop (${city.name}),\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\n\n${data.get("message")}` +
+        (photos.length ? `\n\n(I'll attach ${photos.length} reference photo${photos.length > 1 ? "s" : ""} here.)` : ""),
     );
     window.open(`https://wa.me/${whatsappNumber}?text=${text}`, "_blank");
     setSent(true);
