@@ -1,389 +1,108 @@
 # L'Eto Dreams
+# L'ETO Bakeshop
 
-Build a premium, minimal, elegant website for **L'ETO Bakeshop** in Attock, Pakistan.
+A premium, minimal website for **L'ETO Bakeshop**, a bakery in Attock, Pakistan — built to feel like a luxury European patisserie. Visitors can browse the menu, read reviews, place custom cake enquiries, and order via WhatsApp or phone.
 
-The website should feel like a luxury European patisserie and use the soft pastel blue color palette inspired by the attached menu image.
+Built with [Lovable](https://lovable.dev) and connected to GitHub for two-way sync.
 
-# BUSINESS INFORMATION
+🔗 **Live site:** [l-eto-dreams.vercel.app](https://l-eto-dreams.vercel.app/)
 
-Business Name:
-L'ETO Bakeshop
+## ✨ Features
 
-Tagline:
-"Your Imagination, Our Creation"
+- **City/outlet selector** — landing page to choose from bakery locations (currently Attock, Hazro, Nowshera Cantt, Mardan).
+- **Home page** — hero section, featured products, "Why Choose L'ETO," customer favorites, Instagram callout, and a final call-to-action.
+- **Menu page** — categorized product catalogue (Cakes, Cheesecakes, Sundaes, Cupcakes, Pastries, and more), styled as a digital version of the bakery's physical menu.
+- **Reviews page** — aggregate Google rating (4.3/5, 100+ reviews) with curated customer testimonials and a "Leave a Google Review" link.
+- **Contact page** — address, phone/WhatsApp, opening hours, embedded Google Map, social links, and a custom cake enquiry form that sends details via WhatsApp.
+- **Cart** — lightweight cart widget for building an order.
+- **WhatsApp & click-to-call ordering** — direct `wa.me` links and `tel:` links throughout.
 
-Address:
-Opposite Total Parco Petrol Pump,
-Near Teen Meela Chowk,
-Attock, Pakistan.
+## 🎨 Design System
 
-Phone:
-+92 335 6633668
+- **Colors:** Powder Blue (`#D9E1EC`) background, Warm Ivory (`#F8F5F0`) secondary background, Deep Navy (`#173A5E`) primary text/buttons, Soft Gold (`#C9A66B`) accent.
+- **Typography:** Playfair Display for headings, Poppins for body text.
+- **Aesthetic:** elegant, minimal, warm — intentionally avoids a "corporate" feel, with a small, focused set of pages (Home, Menu, Reviews, Contact only).
 
-Social Media:
-Instagram: @letobakeshop
-Facebook: Leto Bakeshop
-TikTok: LETO Bakeshop
+## 🛠️ Tech Stack
 
-# DESIGN STYLE
+- **Framework:** [TanStack Start](https://tanstack.com/start) (React 19) with [TanStack Router](https://tanstack.com/router) and [TanStack Query](https://tanstack.com/query)
+- **Build tool:** Vite 8
+- **Styling:** Tailwind CSS v4
+- **UI components:** Radix UI primitives via shadcn-style components (accordion, dialog, dropdown, popover, tabs, tooltip, etc.)
+- **Backend/data:** [Supabase](https://supabase.com) (`@supabase/supabase-js`)
+- **Forms & validation:** react-hook-form + Zod
+- **Other notable libraries:** `lucide-react` (icons), `sonner` (toasts), `embla-carousel-react` (carousels), `recharts` (charts), `date-fns`, `cmdk`, `vaul`
+- **Package manager:** Bun (`bun.lock`, `bunfig.toml`)
+- **Linting/formatting:** ESLint + Prettier
+- **Hosting:** Vercel
 
-The website should be:
+## 📁 Project Structure
 
-* Elegant
-* Premium
-* Minimal
-* Warm
-* Luxurious
-* Easy to navigate
-* Highly visual
-
-Do NOT make it look like a large corporate website.
-
-Do NOT create too many pages.
-
-The website should feel like a beautiful digital version of the attached menu design.
-
-# COLOR SCHEME
-
-Primary Background:
-#D9E1EC (Powder Blue)
-
-Secondary Background:
-#F8F5F0 (Warm Ivory)
-
-Primary Text:
-#173A5E (Deep Navy)
-
-Secondary Text:
-#4C6178
-
-Accent:
-#C9A66B (Soft Gold)
-
-Borders:
-#E7DED3
-
-Buttons:
-Deep Navy with Gold hover effects.
-
-# TYPOGRAPHY
-
-Headings:
-Playfair Display
-
-Body:
-Poppins
-
-Use elegant spacing and luxurious typography.
-
-# WEBSITE PAGES
-
-Navigation should only contain:
-
-* Home
-* Menu
-* Reviews
-* Contact
-
-No Gallery page.
-No Blog page.
-No Shop page.
-
-# HEADER
-
-Transparent header.
-
-Logo on left.
-
-Navigation on right.
-
-Include prominent:
-
-ORDER NOW button
-
-WHATSAPP button
-
-Sticky navigation.
-
-# HOME PAGE
-
-Single scrolling homepage.
-
-## HERO SECTION
-
-Large premium cake image background.
-
-Overlay:
-
-L'ETO Bakeshop
-
-Freshly Baked Happiness
-
-Premium handcrafted cakes and desserts in Attock.
-
-Buttons:
-
-View Menu
-Order on WhatsApp
-
-Display:
-
-📍 Teen Meela Chowk, Attock
-📞 +92 335 6633668
-
-Add subtle floating cake illustrations and soft fade animations.
-
-## FEATURED PRODUCTS
-
-Display 6 product cards inspired by the attached menu design:
-
-* Nutella Cake
-* KitKat Cake
-* Lotus Cheesecake
-* San Sebastian Cheesecake
-* Ferrero Cake
-* German Fudge Cake
-
-Card Design:
-
-Large product photo.
-Elegant typography.
-Price.
-Short description.
-
-Cards should resemble a luxury dessert catalogue.
-
-## WHY CHOOSE L'ETO
-
-Features:
-
-Freshly Baked Daily
-Premium Ingredients
-Customized Cakes
-Hygienic Environment
-Beautiful Presentation
-Made With Love
-
-Minimal icon design.
-
-## CUSTOMER FAVORITES
-
-Small section featuring:
-
-Nutella Cake
-Lotus Cheesecake
-Red Velvet Sundae
-Three Milk Cake
-
-## INSTAGRAM SECTION
-
-Beautiful Instagram feed.
-
-Button:
-
-Follow Us on Instagram.
-
-## FINAL CTA
-
-Ready to celebrate?
-
-Order your dream cake today.
-
-Buttons:
-
-WhatsApp
-Call Now
-
-# MENU PAGE
-
-This page should look very similar to the uploaded menu image.
-
-Large product cards.
-
-Pastel blue background.
-
-Elegant typography.
-
-Categories:
-
-Cakes
-Cheesecakes
-Sundaes
-Cupcakes
-Pastries
-
-Each card should include:
-
-Image
-Name
-Description
-Price
-
-Prominent WhatsApp order button.
-
-# REVIEWS PAGE
-
-Display:
-
-★★★★☆ 4.3/5 Google Rating
-
-100+ Reviews
-
-Create elegant review cards inspired by actual customer reviews:
-
-"Best bakery in Attock."
-
-"Nutella pastry is my favorite every weekend."
-
-"Lotus cheesecake is absolutely amazing."
-
-"Fresh cakes and excellent ambiance."
-
-"One of the best bakeshops in Attock."
-
-"Wonderful customized cakes."
-
-Add:
-
-Google Review button.
-
-Include customer photos if available.
-
-# CONTACT PAGE
-
-Simple and clean.
-
-Include:
-
-Google Map.
-Address.
-Phone Number.
-WhatsApp button.
-Social links.
-Simple contact form.
-
-# FOOTER
-
-L'ETO Bakeshop
-
-Your Imagination, Our Creation
-
-Address
-Phone Number
-Opening Hours
-Social Icons
-
-# FEATURES
-
-* Fully responsive.
-* Mobile first.
-* Fast loading.
-* SEO optimized.
-* Floating WhatsApp button.
-* Click-to-call.
-* Smooth scrolling.
-* Elegant hover effects.
-* Minimal animations.
-
-# IMPORTANT
-
-The website should feel like a premium bakery catalogue.
-
-Prioritize:
-
-Beautiful food photography.
-Luxury aesthetics.
-Simple navigation.
-Easy ordering.
-Mobile experience.
-
-The design should communicate:
-
-Luxury + Freshness + Celebration + Trust.
-# IMAGE SOURCING REQUIREMENTS (VERY IMPORTANT)
-
-Do NOT use generic stock bakery photos.
-
-The website must use authentic images of L'ETO Bakeshop's actual products.
-
-Search and collect images from the following official sources:
-
-1. L'ETO Bakeshop Instagram (@letobakeshop)
-2. L'ETO Bakeshop Facebook page
-3. Google Business profile photos and customer-uploaded photos
-4. Any publicly available official L'ETO social media content
-
-Use these real images throughout the website for:
-
-* Cakes
-* Cheesecakes
-* Sundaes
-* Cupcakes
-* Pastries
-* Customized cakes
-* Store interior
-* Customer celebrations
-
-Prioritize high-quality images that accurately represent the products currently offered by L'ETO.
-
-Avoid using unrelated stock photos unless absolutely necessary.
-
-The website should visually showcase the real L'ETO experience so that customers immediately recognize the products when they visit the bakery.
-
-If multiple images are available for a product, select the most professional and visually appealing versions.
-
-The hero section, featured products section, menu page, reviews page, and Instagram section should all prominently feature authentic L'ETO product photography.
-
-# LOGO & FAVICON REQUIREMENTS
-
-Create a premium logo and favicon inspired by the uploaded storefront signage.
-
-Design Style:
-
-* Elegant and luxurious
-* Minimal and modern
-* Inspired by the illuminated "L'ETO" storefront sign
-* European patisserie aesthetic
-
-Logo Specifications:
-
-* Text-based logo: "L'ETO BAKESHOP"
-* Use elegant serif typography similar to the storefront branding.
-* Primary logo color: Deep Navy (#173A5E)
-* Accent color: Soft Gold (#C9A66B)
-
-Create:
-
-1. Primary horizontal logo.
-2. Secondary stacked logo.
-3. Circular favicon/logo icon for browser tabs and mobile devices.
-4. Transparent PNG versions.
-
-The favicon should contain either:
-
-* The letter "L" in an elegant serif style, or
-* "L'ETO" inside a circular premium emblem.
-
-The final logo should closely resemble the real storefront branding while appearing polished and premium for digital use.
-Also visit this website (loadedpakistan.com) and see their Homepage i want that image based gradient interface at the home page
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/61d9c212-7385-4562-a47c-b4eca194e1ba).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
 ```
+l-eto-dreams/
+├── .lovable/          # Lovable project metadata
+├── public/            # Static assets
+├── src/                # Application source (routes, components, etc.)
+├── supabase/           # Supabase config/migrations
+├── AGENTS.md           # Notes for AI coding agents working on this repo
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+├── components.json     # shadcn/ui component config
+└── README.md
+```
+
+## ⚠️ Notes
+
+- **`.env` is committed to this repo.** It currently contains only the Supabase **publishable** (anon) key and project URL — these are designed by Supabase to be exposed on the client side and are safe to ship in a browser bundle, *provided* Row Level Security (RLS) policies are properly configured on the Supabase tables. Even so, committing `.env` files isn't best practice; consider moving these to `.env.local` (gitignored) and relying on your hosting provider's environment variable settings instead, especially if a *service role* or other secret key is ever added later.
+- This project is actively synced with **Lovable** — per `AGENTS.md` in the repo, avoid force-pushing, rebasing, or amending already-pushed commits on the connected branch, as it can break the sync and cause lost history in the Lovable editor.
+
+## 🚀 Getting Started
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (for npm) or [Bun](https://bun.sh/) (recommended, matches the repo's lockfile)
+- A [Supabase](https://supabase.com) project (if you need your own backend instance rather than using the existing one)
+
+### Setup
+```bash
+git clone https://github.com/Hafsanaz/l-eto-dreams-667c2f10.git
+cd l-eto-dreams-667c2f10
+bun install   # or: npm i
+```
+
+### Development
+```bash
+bun run dev   # or: npm run dev
+```
+
+### Build & Preview
+```bash
+bun run build     # or: npm run build
+bun run preview   # or: npm run preview
+```
+
+### Linting & Formatting
+```bash
+bun run lint
+bun run format
+```
+
+## 🔄 Continue Editing in Lovable
+
+This project can also be edited visually in the [Lovable editor](https://lovable.dev/projects/61d9c212-7385-4562-a47c-b4eca194e1ba) — changes made there sync directly back to this repository's `main` branch, and pushes to `main` sync back into Lovable.
+
+## 📍 Current Outlet Info (Attock, flagship)
+
+- **Address:** Opposite Total Parco Petrol Pump, Near Teen Meela Chowk, Attock, Pakistan
+- **Phone/WhatsApp:** +92 335 6633668
+- **Hours:** Mon–Thu 11:00 AM–11:00 PM · Fri–Sun 11:00 AM–12:00 AM
+- **Social:** [Instagram](https://instagram.com/letobakeshop) · [Facebook](https://facebook.com/letobakeshop) · [TikTok](https://www.tiktok.com/@letobakeshop)
+
+## 👤 Author
+
+**Hafsa Naz**
+[GitHub Profile](https://github.com/Hafsanaz)
+
+## 📄 License
+
+Add license information here.
